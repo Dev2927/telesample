@@ -1,8 +1,21 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
+
+const speeds = ["1.2 Gbps", "1.5 Gbps", "2.0 Gbps"];
 
 export const Hero = () => {
+  const [speedIndex, setSpeedIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSpeedIndex((prev) => (prev + 1) % speeds.length);
+    }, 2000); // Change text every 2 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   const floatingVariants = {
     float: {
       y: [-10, 10, -10],
@@ -82,18 +95,20 @@ export const Hero = () => {
             Experience{" "}
             <motion.span
               className="font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-              animate={{ backgroundPosition: ['0%', '200%'] }}
+              animate={{ backgroundPosition: ["0%", "200%"] }}
               transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
-              style={{ 
-                backgroundSize: '200% auto',
-                backgroundImage: 'linear-gradient(90deg, #2563eb, #9333ea, #2563eb)'
+              style={{
+                backgroundSize: "200% auto",
+                backgroundImage:
+                  "linear-gradient(90deg, #2563eb, #9333ea, #2563eb)",
               }}
             >
               lightning-fast
-            </motion.span> connectivity with our revolutionary 5G networks
+            </motion.span>{" "}
+            connectivity with our revolutionary 5G networks
           </motion.p>
 
-          <motion.div 
+          <motion.div
             className="flex justify-center gap-4"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -146,7 +161,7 @@ export const Hero = () => {
                     />
                   ))}
                 </div>
-                
+
                 {/* Animated speed meter */}
                 <motion.div
                   className="absolute bottom-6 left-6 right-6 bg-white rounded-xl p-4 shadow-lg"
@@ -158,13 +173,13 @@ export const Hero = () => {
                     <span className="text-gray-600">Connection Speed</span>
                     <motion.div
                       className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-                      animate={{ text: ["1.2 Gbps", "1.5 Gbps", "2.0 Gbps"] }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                      }}
-                    />
+                      key={speedIndex}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      {speeds[speedIndex]}
+                    </motion.div>
                   </div>
                   <motion.div
                     className="h-2 bg-gray-200 rounded-full mt-2 overflow-hidden"
