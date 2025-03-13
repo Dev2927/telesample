@@ -1,6 +1,5 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "./ui/button";
-import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
 const speeds = ["1.2 Gbps", "1.5 Gbps", "2.0 Gbps"];
