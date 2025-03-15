@@ -1,4 +1,4 @@
-import { motion, LayoutGroup } from "framer-motion";
+import { motion } from "framer-motion";
 import { RocketIcon, LightningBoltIcon, GlobeIcon, LockClosedIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
 
@@ -32,123 +32,71 @@ const features = [
 export const Features = () => {
   return (
     <section className="py-24 bg-gradient-to-b from-white to-blue-50/50 relative overflow-hidden">
-      {/* Animated background elements */}
-      <motion.div 
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        className="absolute inset-0 opacity-10"
-      >
-        {[...Array(8)].map((_, i) => (
-          <motion.div
+      {/* Simplified background elements */}
+      <div className="absolute inset-0 opacity-10">
+        {[...Array(4)].map((_, i) => (
+          <div
             key={i}
-            animate={{ 
-              rotate: 360,
-              x: [0, 100, 0],
-              y: [0, 50, 0],
-            }}
-            transition={{
-              duration: 20 + i * 5,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            className="absolute bg-gradient-to-r from-blue-200 to-purple-200 rounded-full blur-xl"
+            className="absolute bg-gradient-to-r from-blue-100 to-purple-100 rounded-full blur-xl animate-pulse-slow"
             style={{
-              width: `${Math.random() * 200 + 100}px`,
-              height: `${Math.random() * 200 + 100}px`,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
+              width: `${150 + i * 50}px`,
+              height: `${150 + i * 50}px`,
+              top: `${20 + i * 20}%`,
+              left: `${i * 25}%`,
             }}
           />
         ))}
-      </motion.div>
+      </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-20"
-        >
-          <motion.h2 
-            className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-            initial={{ backgroundPosition: "0%" }}
-            animate={{ backgroundPosition: "100%" }}
-            transition={{ duration: 4, repeat: Infinity, repeatType: "mirror" }}
-          >
-            Why Choose Us?
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-gray-600 text-xl max-w-3xl mx-auto"
-          >
-            We're redefining mobile connectivity with cutting-edge technology and
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent relative inline-block">
+            <span className="relative z-10 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent relative inline-block">Why Choose Us?</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/30 to-purple-600/30 blur-2xl opacity-50 -z-10" />
+          </h2>
+          <p className="text-gray-600 text-xl max-w-3xl mx-auto">
+            We're redefining mobile connectivity with cutting-edge technology and{" "}
             <span className="font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              {" "}customer-centric innovation
+              customer-centric innovation
             </span>
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
-        <LayoutGroup>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ delay: index * 0.15 }}
-                className="group relative h-full"
-              >
-                <motion.div
-                  whileHover={{ y: -10 }}
-                  className={cn(
-                    "h-full p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow",
-                    "relative overflow-hidden border border-gray-100"
-                  )}
-                >
-                  {/* Icon container - always visible */}
-                  <motion.div
-                    className={`w-16 h-16 mb-6 rounded-2xl flex items-center justify-center bg-gradient-to-br ${feature.color} relative`}
-                  >
-                    <motion.div 
-                      className="text-black"
-                      whileHover={{ rotate: 360 }}
-                      transition={{ type: "spring" }}
-                    >
-                      {feature.icon}
-                    </motion.div>
-                  </motion.div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="group relative h-full transition-transform duration-300 hover:-translate-y-2"
+            >
+              <div className={cn(
+                "h-full p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl",
+                "relative overflow-hidden border border-gray-100/50 transition-all",
+                "bg-gradient-to-b from-white/50 to-white/90",
+                "before:absolute before:inset-0 before:bg-gradient-to-br before:opacity-0 before:transition-opacity before:duration-300",
+                `before:${feature.color} group-hover:before:opacity-10`
+              )}>
+                {/* Icon container */}
+                <div className={`w-16 h-16 mb-6 rounded-2xl flex items-center justify-center bg-gradient-to-br ${feature.color} relative`}>
+                  <div className="transition-transform duration-300 group-hover:scale-110">
+                    {feature.icon}
+                  </div>
+                </div>
 
-                  {/* Content */}
-                  <motion.h3 
-                    className="text-2xl font-bold mb-4 bg-gradient-to-br bg-clip-text text-black"
-                    style={{ backgroundImage: `linear-gradient(to right, ${feature.color.replace('from-', '').replace('to-', '').replace(' ', ', ')})` }}
-                  >
-                    {feature.title}
-                  </motion.h3>
-                  <motion.p 
-                    className="text-gray-600 text-lg leading-relaxed"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 + index * 0.1 }}
-                  >
-                    {feature.description}
-                  </motion.p>
+                {/* Content */}
+                <h3 className="text-2xl font-bold mb-4 bg-gradient-to-br bg-clip-text text-black" 
+                    style={{ backgroundImage: `linear-gradient(to right, ${feature.color.replace('from-', '').replace('to-', '').replace(' ', ', ')})` }}>
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 text-lg leading-relaxed animate-fade-in-up">
+                  {feature.description}
+                </p>
 
-                  {/* Hover effect line */}
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileHover={{ width: "100%" }}
-                    className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-blue-600 to-purple-600"
-                    transition={{ duration: 0.4 }}
-                  />
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-        </LayoutGroup>
+                {/* Hover effect line */}
+                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
