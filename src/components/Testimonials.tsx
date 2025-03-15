@@ -63,7 +63,7 @@ export const Testimonials = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, index) => (
+          {testimonials.map((testimonial, _) => (
             <div
               key={testimonial.name}
               className="group relative transition-transform duration-300 hover:-translate-y-2"

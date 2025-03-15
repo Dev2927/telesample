@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { RocketIcon, LightningBoltIcon, GlobeIcon, LockClosedIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
 

@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { CheckIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
@@ -58,7 +57,7 @@ export const Pricing = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {plans.map((plan, index) => (
+          {plans.map((plan, _) => (
             <div
               key={plan.name}
               className={cn(
